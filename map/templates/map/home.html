@@ -1,0 +1,80 @@
+{% extends 'map/main.html' %}
+{%load static %}
+
+{% block content %}
+
+	<div class="d-xl-flex d-lg-flex d-md-flex d-sm-flex flex-xl-row flex-lg-row flex-md-column flex-sm-column">
+		<div class="col-xs-12" style="min-width: 330px;">
+			<div class="row">
+				<div class="col-12">
+					<p style="font-size: 16px; font-weight: 600; margin:0;">Total confirmed Cases</p>
+					<p id="GTotal">0</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-6"><p style="font-size: 12px; margin-bottom: 5px;"><i class="fas fa-circle" style="font-size: 10px;color: #ee8814; margin-right: 5px;"></i>Ratio/Million</p></div>
+				<div class="col-3"><p style="font-size: 12px; margin-bottom: 5px;"><span id="txtGRatio" style="margin-left: 0px; font-size: 12px;">0</span></p></div>
+				<div class="col-3"><p style="font-size: 12px; margin-bottom: 5px;"><span id="txtGRatioNew" style="margin-left: 0px;font-size: 12px; background-color: #c7c6c6;"></span></p></div>
+			</div>
+			<div class="row">
+				<div class="col-6"><p style="font-size: 12px; margin-bottom: 5px;"><i class="fas fa-circle" style="font-size: 10px;color: #d3a629; margin-right: 5px;"></i>Active cases</p></div>
+				<div class="col-3"><p style="font-size: 12px; margin-bottom: 5px;"><span id="txtGActive" style="margin-left: 0px; font-size: 12px;">0</span></p></div>
+				<div class="col-3"><p style="font-size: 12px; margin-bottom: 5px;"><span id="txtGActiveNew" style="margin-left: 0px;font-size: 12px; background-color: #c7c6c6;">+0</span></p></div>
+			</div>
+			<div class="row">
+				<div class="col-6"><p style="font-size: 12px; margin-bottom: 5px;"><i class="fas fa-circle" style="font-size: 10px;color: hsl(140, 91%, 27%); margin-right: 5px;"></i>Recovered cases</p></div>
+				<div class="col-3"><p style="font-size: 12px; margin-bottom: 5px;"><span id="txtGRecovered" style="margin-left: 0px; font-size: 12px;">0</span></p></div>
+				<div class="col-3"><p style="font-size: 12px; margin-bottom: 5px;"><span id="txtGRecoveredNew" style="margin-left: 0px;font-size: 12px; background-color: #c7c6c6;"></span></p></div>
+			</div>
+			<div class="row">
+				<div class="col-6"><p style="font-size: 12px; margin-bottom: 5px;"><i class="fas fa-circle" style="font-size: 10px;color: hsl(60, 1%, 45%); margin-right: 5px;"></i>Fatal cases</p></div>
+				<div class="col-3"><p style="font-size: 12px; margin-bottom: 5px;"><span id="txtGFatal" style="margin-left: 0px; font-size: 12px;">0</span></p></div>
+				<div class="col-3"><p style="font-size: 12px; margin-bottom: 5px;"><span id="txtGFatalNew" style="margin-left: 0px;font-size: 12px; background-color: #c7c6c6;">+0</span></p></div>
+			</div>
+			<div class="col-12 " >
+				<div class="row">
+					<div class="input-group">
+						<input type="text" class="form-control" id="countrySearch" placeholder="Search a location">
+						<div class="input-group-btn" >
+							<div class="dropdown dropleft">
+								<a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fas fa-filter"></i>
+								</a>
+								
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left:-100px !important;">
+									<a class="dropdown-item" href="#" onclick="sortCountry('name')">Name</a>
+									<a class="dropdown-item" href="#" onclick="sortCountry('TotalCases')">Total Cases</a>
+									<a class="dropdown-item" href="#" onclick="sortCountry('ActiveCases')">Active Cases</a>
+									<a class="dropdown-item" href="#" onclick="sortCountry('NewCases')">New Cases</a>
+									<a class="dropdown-item" href="#" onclick="sortCountry('TotalDeaths')">Total Death</a>
+									<a class="dropdown-item" href="#" onclick="sortCountry('NewDeaths')">New Death</a>
+									<a class="dropdown-item" href="#" onclick="sortCountry('TotalRecovered')">Total Recovered</a>
+								</div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 vertical-scroll">
+				<div class="row">
+					<div class="list-group" id="countryGroup"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 w-100">
+			<div id="mapid"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4" id="canvasContainer">
+			
+		</div>
+		<div class="col-md-8" >
+			<div id="container"></div>
+		</div>
+	</div>
+	
+	<script src="{% static 'js/main.js' %}"></script>
+
+
+{% endblock %}
